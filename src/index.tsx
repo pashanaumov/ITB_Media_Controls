@@ -1,3 +1,4 @@
+import React from 'react';
 import MediaControls from "./MediaControls";
 import { PLAYER_STATES } from "./constants/playerStates";
 
