@@ -15,5 +15,5 @@
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/*"],
-  "jsx": "react"
+  "jsx": "react" 
 }

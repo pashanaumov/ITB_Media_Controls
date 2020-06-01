@@ -19,7 +19,7 @@ type SliderProps = Pick<
   onPause: () => void;
 };
 
-const fullScreenImage = require("./assets/ic_fullscreen.png");
+const fullScreenImage = require('./assets/ic_fullscreen.png');
 
 const Slider: React.FC<SliderProps> = props => {
   const { progress, duration, mainColor, onFullScreen, onPause } = props;
