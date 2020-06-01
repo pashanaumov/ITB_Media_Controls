@@ -1,98 +1,101 @@
-import { StyleSheet } from "react-native";
+import {StyleSheet} from 'react-native';
 
-const containerBackgroundColor = "rgba(45, 59, 62, 0.4)";
-const playButtonBorderColor = "rgba(255,255,255,0.5)";
-const white = "#fff";
+const containerBackgroundColor = 'rgba(4, 5, 6, 0.3)';
+const playButtonBorderColor = 'rgba(255,255,255,0.5)';
+const white = '#fff';
 
 export default StyleSheet.create({
   container: {
-    alignItems: "center",
+    alignItems: 'center',
     backgroundColor: containerBackgroundColor,
     bottom: 0,
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-between",
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     left: 0,
     paddingHorizontal: 20,
     paddingVertical: 13,
-    position: "absolute",
+    position: 'absolute',
     right: 0,
     top: 0,
   },
   controlsRow: {
-    alignItems: "center",
-    alignSelf: "stretch",
+    alignItems: 'center',
+    alignSelf: 'stretch',
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   fullScreenContainer: {
-    alignItems: "center",
-    alignSelf: "stretch",
-    justifyContent: "center",
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
     paddingLeft: 20,
   },
   playButton: {
-    alignItems: "center",
-    borderColor: playButtonBorderColor,
-    borderRadius: 3,
-    borderWidth: 1.5,
-    height: 50,
-    justifyContent: "center",
-    width: 50,
+    alignItems: 'center',
+    borderRadius: 100,
+    height: 75,
+    justifyContent: 'center',
+    width: 75,
   },
   playIcon: {
-    height: 22,
-    resizeMode: "contain",
-    width: 22,
+    height: 28,
+    resizeMode: 'contain',
+    borderColor: 'red',
+    width: 28,
   },
   progressColumnContainer: {
     flex: 1,
   },
   progressContainer: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
     marginBottom: -25,
   },
   progressSlider: {
-    alignSelf: "stretch",
+    alignSelf: 'stretch',
   },
   replayIcon: {
     height: 20,
-    resizeMode: "stretch",
+    resizeMode: 'stretch',
     width: 25,
   },
   thumb: {
     backgroundColor: white,
     borderRadius: 50,
     borderWidth: 3,
-    height: 20,
-    width: 20,
+    height: 12,
+    width: 12,
   },
   timeRow: {
-    alignSelf: "stretch",
+    alignSelf: 'stretch',
   },
   timerLabel: {
     color: white,
-    fontSize: 12,
+    fontSize: 11,
+    fontFamily: "System",
+    fontWeight: "400"
   },
   timerLabelsContainer: {
-    alignSelf: "stretch",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    alignSelf: 'stretch',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: -7,
+    marginLeft: 0
   },
   toolbar: {
-    flexDirection: "row",
+    flexDirection: 'row',
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
   },
   toolbarRow: {
-    alignItems: "flex-start",
-    flexDirection: "row",
-    justifyContent: "flex-start",
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
   },
   track: {
     borderRadius: 1,
-    height: 5,
+    height: 4,
+    backgroundColor: 'rgb(34, 34, 37)',
   },
 });

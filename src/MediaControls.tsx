@@ -1,15 +1,10 @@
-import React, { useState } from "react";
-import {
-  View,
-  Animated,
-  TouchableWithoutFeedback,
-  GestureResponderEvent,
-} from "react-native";
-import styles from "./MediaControls.style";
-import { PLAYER_STATES } from "./constants/playerStates";
-import { Controls } from "./Controls";
-import { Slider } from "./Slider";
-import { Toolbar } from "./Toolbar";
+import React, { useState } from 'react';
+import { View, Animated, TouchableWithoutFeedback, GestureResponderEvent } from 'react-native';
+import styles from './MediaControls.style';
+import { PLAYER_STATES } from './constants/playerStates';
+import { Controls } from './Controls';
+import { Slider } from './Slider';
+import { Toolbar } from './Toolbar';
 
 interface MediaControlsComposition {
   Toolbar: React.FC;
@@ -26,24 +21,26 @@ export type Props = {
   onReplay: () => void;
   onSeek: (value: number) => void;
   onSeeking: (value: number) => void;
+  onHidePageInfo?: () => void;
   playerState: PLAYER_STATES;
   progress: number;
   showOnStart?: boolean;
 };
 
-const MediaControls: React.FC<Props> & MediaControlsComposition = props => {
+const MediaControls: React.FC<Props> & MediaControlsComposition = (props) => {
   const {
     children,
     duration,
     fadeOutDelay = 5000,
     isLoading = false,
-    mainColor = "rgba(12, 83, 175, 0.9)",
+    mainColor = 'rgba(12, 83, 175, 0.2)',
     onFullScreen,
     onReplay: onReplayCallback,
     onSeek,
     onSeeking,
     playerState,
     progress,
+    onHidePageInfo,
     showOnStart = true,
   } = props;
   const { initialOpacity, initialIsVisible } = (() => {
@@ -69,7 +66,7 @@ const MediaControls: React.FC<Props> & MediaControlsComposition = props => {
       duration: 300,
       delay,
       useNativeDriver: false,
-    }).start(result => {
+    }).start((result) => {
       /* I noticed that the callback is called twice, when it is invoked and when it completely finished
       This prevents some flickering */
       if (result.finished) {
@@ -122,6 +119,7 @@ const MediaControls: React.FC<Props> & MediaControlsComposition = props => {
   const toggleControls = () => {
     // value is the last value of the animation when stop animation was called.
     // As this is an opacity effect, I (Charlie) used the value (0 or 1) as a boolean
+    onHidePageInfo();
     opacity.stopAnimation((value: number) => {
       setIsVisible(!!value);
       return value ? fadeOutControls() : fadeInControls();
@@ -133,9 +131,7 @@ const MediaControls: React.FC<Props> & MediaControlsComposition = props => {
       <Animated.View style={[styles.container, { opacity }]}>
         {isVisible && (
           <View style={styles.container}>
-            <View style={[styles.controlsRow, styles.toolbarRow]}>
-              {children}
-            </View>
+            <View style={[styles.controlsRow, styles.toolbarRow]}>{children}</View>
             <Controls
               onPause={onPause}
               onReplay={onReplay}
