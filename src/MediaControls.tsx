@@ -21,7 +21,6 @@ export type Props = {
   onReplay: () => void;
   onSeek: (value: number) => void;
   onSeeking: (value: number) => void;
-  onHidePageInfo?: () => void;
   playerState: PLAYER_STATES;
   progress: number;
   showOnStart?: boolean;
@@ -119,7 +118,9 @@ const MediaControls: React.FC<Props> & MediaControlsComposition = (props) => {
   const toggleControls = () => {
     // value is the last value of the animation when stop animation was called.
     // As this is an opacity effect, I (Charlie) used the value (0 or 1) as a boolean
-    onHidePageInfo();
+    if (Boolean(onHidePageInfo)) {
+      onHidePageInfo();
+    }
     opacity.stopAnimation((value: number) => {
       setIsVisible(!!value);
       return value ? fadeOutControls() : fadeInControls();
