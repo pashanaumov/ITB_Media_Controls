@@ -19,6 +19,7 @@ export type Props = {
   onFullScreen?: (event: GestureResponderEvent) => void;
   onPaused: (playerState: PLAYER_STATES) => void;
   onReplay: () => void;
+  onHidePageInfo: () => void;
   onSeek: (value: number) => void;
   onSeeking: (value: number) => void;
   playerState: PLAYER_STATES;
