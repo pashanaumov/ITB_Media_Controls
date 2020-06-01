@@ -23,7 +23,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/react": "*",
+    "@types/react": "^16.9.35",
     "@types/react-native": "^0.61.23",
     "metro-react-native-babel-preset": "^0.59.0",
     "prettier": "^2.0.1",
