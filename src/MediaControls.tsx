@@ -26,10 +26,10 @@ export type Props = {
   onReplay: () => void;
   onSeek: (value: number) => void;
   onSeeking: (value: number) => void;
-  onHidePageInfo?: boolean | undefined;
   playerState: PLAYER_STATES;
   progress: number;
   showOnStart?: boolean;
+  onHidePageInfo: boolean;
 };
 
 const MediaControls: React.FC<Props> & MediaControlsComposition = props => {
@@ -45,7 +45,7 @@ const MediaControls: React.FC<Props> & MediaControlsComposition = props => {
     onSeeking,
     playerState,
     progress,
-    onHidePageInfo,
+    onHidePageInfo = true,
     showOnStart = true,
   } = props;
   const {initialOpacity, initialIsVisible} = (() => {
@@ -67,7 +67,6 @@ const MediaControls: React.FC<Props> & MediaControlsComposition = props => {
 
   useEffect(() => {
     setIsVisible(onHidePageInfo);
-    animationFade();
   }, [onHidePageInfo]);
 
   const fadeOutControls = (delay = 0) => {
