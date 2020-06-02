@@ -21,7 +21,7 @@ export type Props = {
   onReplay: () => void;
   onSeek: (value: number) => void;
   onSeeking: (value: number) => void;
-  onHidePageInfo?: boolean | undefined;
+  onHidePageInfo: boolean | undefined;
   playerState: PLAYER_STATES;
   progress: number;
   showOnStart?: boolean;
