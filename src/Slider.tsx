@@ -1,31 +1,25 @@
 import React from 'react';
-import {TouchableOpacity, View, Text, Image} from 'react-native';
+import { TouchableOpacity, View, Text, Image } from 'react-native';
 import RNSlider from 'react-native-slider';
 import styles from './MediaControls.style';
-import {humanizeVideoDuration} from './utils';
-import {Props} from './MediaControls';
-import {PLAYER_STATES} from './constants/playerStates';
+import { humanizeVideoDuration } from './utils';
+import { Props } from './MediaControls';
+import { PLAYER_STATES } from './constants/playerStates';
 
 type SliderProps = Pick<
   Props,
-  | 'progress'
-  | 'duration'
-  | 'mainColor'
-  | 'onFullScreen'
-  | 'playerState'
-  | 'onSeek'
-  | 'onSeeking'
+  'progress' | 'duration' | 'mainColor' | 'onFullScreen' | 'playerState' | 'onSeek' | 'onSeeking'
 > & {
   onPause: () => void;
 };
 
 const fullScreenImage = require('./assets/ic_fullscreen.png');
 
-const Slider: React.FC<SliderProps> = props => {
-  const {progress, duration, mainColor, onFullScreen, onPause} = props;
+const Slider: React.FC<SliderProps> = (props) => {
+  const { progress, duration, mainColor, onFullScreen, onPause } = props;
 
   const dragging = (value: number) => {
-    const {onSeeking, playerState} = props;
+    const { onSeeking, playerState } = props;
     onSeeking(value);
 
     if (playerState === PLAYER_STATES.PAUSED) {
@@ -41,7 +35,7 @@ const Slider: React.FC<SliderProps> = props => {
   };
 
   return (
-    <View style={[styles.controlsRow, styles.progressContainer]}>
+    <View style={[styles.controlsRow, styles.progressContainer, { top: -10 }]}>
       <View style={styles.progressColumnContainer}>
         <RNSlider
           style={styles.progressSlider}
@@ -50,22 +44,16 @@ const Slider: React.FC<SliderProps> = props => {
           maximumValue={Math.floor(duration)}
           value={Math.floor(progress)}
           trackStyle={styles.track}
-          thumbStyle={[styles.thumb, {borderColor: '#fff'}]}
+          thumbStyle={[styles.thumb, { borderColor: '#fff' }]}
           minimumTrackTintColor={'#fff'}
         />
         <View style={[styles.timerLabelsContainer]}>
-          <Text style={styles.timerLabel}>
-            {humanizeVideoDuration(progress)}
-          </Text>
-          <Text style={styles.timerLabel}>
-            {humanizeVideoDuration(duration)}
-          </Text>
+          <Text style={styles.timerLabel}>{humanizeVideoDuration(progress)}</Text>
+          <Text style={styles.timerLabel}>{humanizeVideoDuration(duration)}</Text>
         </View>
       </View>
       {Boolean(onFullScreen) && (
-        <TouchableOpacity
-          style={styles.fullScreenContainer}
-          onPress={onFullScreen}>
+        <TouchableOpacity style={styles.fullScreenContainer} onPress={onFullScreen}>
           <Image source={fullScreenImage} />
         </TouchableOpacity>
       )}
@@ -73,4 +61,4 @@ const Slider: React.FC<SliderProps> = props => {
   );
 };
 
-export {Slider};
+export { Slider };

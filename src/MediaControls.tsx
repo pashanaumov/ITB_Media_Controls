@@ -64,20 +64,20 @@ const MediaControls: React.FC<Props> & MediaControlsComposition = (props) => {
     setIsVisible(showControls);
   }, [showControls]);
 
-  const fadeOutControls = (delay = 0) => {
-    Animated.timing(opacity, {
-      toValue: 0,
-      duration: 300,
-      delay,
-      useNativeDriver: false,
-    }).start((result) => {
-      /* I noticed that the callback is called twice, when it is invoked and when it completely finished
-      This prevents some flickering */
-      if (result.finished) {
-        setIsVisible(false);
-      }
-    });
-  };
+  // const fadeOutControls = (delay = 0) => {
+  //   Animated.timing(opacity, {
+  //     toValue: 0,
+  //     duration: 300,
+  //     delay,
+  //     useNativeDriver: false,
+  //   }).start((result) => {
+  //     /* I noticed that the callback is called twice, when it is invoked and when it completely finished
+  //     This prevents some flickering */
+  //     if (result.finished) {
+  //       setIsVisible(false);
+  //     }
+  //   });
+  // };
 
   const fadeInControls = (loop = true) => {
     setIsVisible(true);
@@ -88,13 +88,13 @@ const MediaControls: React.FC<Props> & MediaControlsComposition = (props) => {
       useNativeDriver: false,
     }).start(() => {
       if (loop) {
-        fadeOutControls(fadeOutDelay);
+        // fadeOutControls(fadeOutDelay);
       }
     });
   };
 
   const onReplay = () => {
-    fadeOutControls(fadeOutDelay);
+    // fadeOutControls(fadeOutDelay);
     onReplayCallback();
   };
 
@@ -108,14 +108,14 @@ const MediaControls: React.FC<Props> & MediaControlsComposition = (props) => {
     return onPaused(newPlayerState);
   };
 
-  const animationFade = () => {
-    // value is the last value of the animation when stop animation was called.
-    // As this is an opacity effect, I (Charlie) used the value (0 or 1) as a boolean
-    opacity.stopAnimation((value: number) => {
-      setIsVisible(!!value);
-      return value ? fadeOutControls() : fadeInControls();
-    });
-  };
+  // const animationFade = () => {
+  //   // value is the last value of the animation when stop animation was called.
+  //   // As this is an opacity effect, I (Charlie) used the value (0 or 1) as a boolean
+  //   opacity.stopAnimation((value: number) => {
+  //     setIsVisible(!!value);
+  //     return value ? fadeOutControls() : fadeInControls();
+  //   });
+  // };
 
   return (
     <Animated.View style={[styles.container, { opacity }]}>
