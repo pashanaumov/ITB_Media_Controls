@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Animated, TouchableWithoutFeedback, GestureResponderEvent } from 'react-native';
 import styles from './MediaControls.style';
 import { PLAYER_STATES } from './constants/playerStates';
@@ -19,12 +19,12 @@ export type Props = {
   onFullScreen?: (event: GestureResponderEvent) => void;
   onPaused: (playerState: PLAYER_STATES) => void;
   onReplay: () => void;
-  onHidePageInfo: () => void;
   onSeek: (value: number) => void;
   onSeeking: (value: number) => void;
   playerState: PLAYER_STATES;
   progress: number;
   showOnStart?: boolean;
+  onHidePageInfo: boolean;
 };
 
 const MediaControls: React.FC<Props> & MediaControlsComposition = (props) => {
@@ -59,6 +59,11 @@ const MediaControls: React.FC<Props> & MediaControlsComposition = (props) => {
 
   const [opacity] = useState(new Animated.Value(initialOpacity));
   const [isVisible, setIsVisible] = useState(initialIsVisible);
+
+  useEffect(() => {
+    setIsVisible(onHidePageInfo);
+    animationFade();
+  }, [onHidePageInfo]);
 
   const fadeOutControls = (delay = 0) => {
     Animated.timing(opacity, {
@@ -116,12 +121,9 @@ const MediaControls: React.FC<Props> & MediaControlsComposition = (props) => {
     return onPaused(newPlayerState);
   };
 
-  const toggleControls = () => {
+  const animationFade = () => {
     // value is the last value of the animation when stop animation was called.
     // As this is an opacity effect, I (Charlie) used the value (0 or 1) as a boolean
-    if (Boolean(onHidePageInfo)) {
-      onHidePageInfo();
-    }
     opacity.stopAnimation((value: number) => {
       setIsVisible(!!value);
       return value ? fadeOutControls() : fadeInControls();
@@ -129,32 +131,32 @@ const MediaControls: React.FC<Props> & MediaControlsComposition = (props) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={toggleControls}>
-      <Animated.View style={[styles.container, { opacity }]}>
-        {isVisible && (
-          <View style={styles.container}>
-            <View style={[styles.controlsRow, styles.toolbarRow]}>{children}</View>
-            <Controls
-              onPause={onPause}
-              onReplay={onReplay}
-              isLoading={isLoading}
-              mainColor={mainColor}
-              playerState={playerState}
-            />
-            <Slider
-              progress={progress}
-              duration={duration}
-              mainColor={mainColor}
-              onFullScreen={onFullScreen}
-              playerState={playerState}
-              onSeek={onSeek}
-              onSeeking={onSeeking}
-              onPause={onPause}
-            />
-          </View>
-        )}
-      </Animated.View>
-    </TouchableWithoutFeedback>
+    // <TouchableWithoutFeedback onPress={toggleControls}>
+    <Animated.View style={[styles.container, { opacity }]}>
+      {isVisible && (
+        <View style={styles.container}>
+          <View style={[styles.controlsRow, styles.toolbarRow]}>{children}</View>
+          <Controls
+            onPause={onPause}
+            onReplay={onReplay}
+            isLoading={isLoading}
+            mainColor={mainColor}
+            playerState={playerState}
+          />
+          <Slider
+            progress={progress}
+            duration={duration}
+            mainColor={mainColor}
+            onFullScreen={onFullScreen}
+            playerState={playerState}
+            onSeek={onSeek}
+            onSeeking={onSeeking}
+            onPause={onPause}
+          />
+        </View>
+      )}
+    </Animated.View>
+    // </TouchableWithoutFeedback>
   );
 };
 
