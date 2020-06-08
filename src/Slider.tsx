@@ -11,12 +11,13 @@ type SliderProps = Pick<
   'progress' | 'duration' | 'mainColor' | 'onFullScreen' | 'playerState' | 'onSeek' | 'onSeeking'
 > & {
   onPause: () => void;
+  sliderPosition: {};
 };
 
 const fullScreenImage = require('./assets/ic_fullscreen.png');
 
 const Slider: React.FC<SliderProps> = (props) => {
-  const { progress, duration, mainColor, onFullScreen, onPause } = props;
+  const { progress, duration, mainColor, onFullScreen, onPause, sliderPosition } = props;
 
   const dragging = (value: number) => {
     const { onSeeking, playerState } = props;
@@ -35,7 +36,7 @@ const Slider: React.FC<SliderProps> = (props) => {
   };
 
   return (
-    <View style={[styles.controlsRow, styles.progressContainer, { top: -10 }]}>
+    <View style={[styles.controlsRow, styles.progressContainer, sliderPosition]}>
       <View style={styles.progressColumnContainer}>
         <RNSlider
           style={styles.progressSlider}

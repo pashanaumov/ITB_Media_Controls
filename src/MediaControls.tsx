@@ -25,6 +25,7 @@ export type Props = {
   progress: number;
   showOnStart?: boolean;
   showControls: boolean;
+  sliderPosition: {}
 };
 
 const MediaControls: React.FC<Props> & MediaControlsComposition = (props) => {
@@ -40,6 +41,7 @@ const MediaControls: React.FC<Props> & MediaControlsComposition = (props) => {
     onSeeking,
     playerState,
     progress,
+    sliderPosition,
     showControls = true,
     showOnStart = true,
   } = props;
@@ -139,6 +141,7 @@ const MediaControls: React.FC<Props> & MediaControlsComposition = (props) => {
             onSeek={onSeek}
             onSeeking={onSeeking}
             onPause={onPause}
+            sliderPosition={sliderPosition}
           />
         </View>
       )}
